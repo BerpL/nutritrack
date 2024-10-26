@@ -1,0 +1,96 @@
+<div
+  class="flex flex-col items-center justify-center"
+  style="height: calc(100vh - 150px);"
+>
+  <!-- Componente Steps -->
+  <ul class="steps steps-primary w-full max-w-lg">
+    <li [ngClass]="{'step-primary': currentStep >= 1}" class="step">
+      Subir Excel
+    </li>
+    <li [ngClass]="{'step-primary': currentStep >= 2}" class="step">
+      Procesamiento
+    </li>
+    <li [ngClass]="{'step-primary': currentStep >= 3}" class="step">
+      Descargar PDF
+    </li>
+  </ul>
+
+  <!-- Contenido del paso 1: Subir archivo Excel -->
+  <div
+    *ngIf="currentStep === 1"
+    class="mt-8 flex flex-col items-center justify-center w-full max-w-md"
+  >
+    <p class="text-lg font-semibold text-center mt-8">Sube un archivo Excel</p>
+    <input
+      type="file"
+      class="file-input file-input-primary w-full mt-4"
+      accept=".xlsx, .xls"
+      #fileInput
+      (change)="onFileUpload($event)"
+    />
+    <!-- Botón para continuar al paso 2 -->
+    <button
+      *ngIf="fileUploaded"
+      class="btn btn-primary mt-4"
+      [disabled]="isLoading"
+      (click)="processExcel()"
+    >
+      <ng-container *ngIf="!isLoading; else loading">
+        Continuar
+      </ng-container>
+      <ng-template #loading>
+        <div class="loading loading-spinner"></div>
+      </ng-template>
+    </button>
+  </div>
+
+  <!-- Contenido del paso 2: Procesando -->
+  <div
+    *ngIf="currentStep === 2"
+    class="w-full max-w-md flex items-center justify-center text-center mt-8"
+  >
+    <div class="loading loading-spinner mr-2"></div>
+    <!-- Spinner al lado izquierdo -->
+    <p
+      class="text-lg font-semibold transition-opacity duration-1000 ease-in-out opacity-0"
+      [ngClass]="{'opacity-100': animatingIn, 'opacity-0': animatingOut}"
+    >
+      {{ processingMessage }}...
+    </p>
+  </div>
+
+  <!-- Contenido del paso 3: Descargar PDF -->
+  <div *ngIf="currentStep === 3" class="w-full max-w-md text-center">
+    <p class="text-lg font-semibold mt-8">Descargar archivo PDF</p>
+
+    <!-- Botón de Descargar -->
+    <button
+      class="btn btn-primary mt-4"
+      [disabled]="isLoading || isDownloading"
+      (click)="downloadPDF()"
+    >
+      <ng-container *ngIf="!isDownloading; else downloadingSpinner">
+        Descargar
+      </ng-container>
+      <ng-template #downloadingSpinner>
+        <div class="loading loading-spinner"></div>
+      </ng-template>
+    </button>
+
+    <!-- Botón de Volver a cargar -->
+    <button
+      *ngIf="showReloadButton"
+      class="btn btn-outline btn-primary mt-2"
+      (click)="resetProcess()"
+    >
+      Volver a cargar
+    </button>
+  </div>
+
+  <!-- Contenido HTML dinámico para el PDF -->
+  <section class="body-export-pdf">
+    <div #pdfContent class="mt-8">
+      <app-pdf-template [data]="[singlePageData]"></app-pdf-template>
+    </div>
+  </section>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,8 +6,18 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'nutritrack';
+
+  ngOnInit() {
+    this.applyTheme(); 
+  }
+
+  applyTheme() {
+    const theme = localStorage.getItem('theme') || 'winter';
+    document.body.classList.remove('winter', 'night');
+    document.body.classList.add(theme);
+  }
 }

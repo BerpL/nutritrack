@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.body-export-pdf {
+	height: 0px;
+	overflow-x: scroll;
+	position: absolute;
+	z-index: -99;
+  }

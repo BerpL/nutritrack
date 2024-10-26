@@ -1,0 +1,54 @@
+<div class="flex min-h-screen items-center justify-center bg-base-200">
+	<div class="bg-base-100 p-8 rounded-lg shadow-lg w-full max-w-md">
+	  <h1 class="text-3xl font-bold text-center mb-8 text-base-content">NutriTrack</h1>
+  
+	  <!-- Mostrar error si las credenciales son incorrectas -->
+	  @if (errorMessage) {
+		<div class="alert alert-error mb-4">
+		  <div>
+			<span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+			<span>{{ errorMessage }}</span>
+		  </div>
+		</div>
+	  }
+  
+	  <!-- Formulario de login -->
+	  <div class="form-control mb-4">
+		<label class="label">
+		  <span class="label-text text-base-content">Nombre de usuario</span>
+		</label>
+		<input
+		  type="text"
+		  class="input input-bordered bg-base-100 text-base-content"
+		  [(ngModel)]="username"
+		  placeholder="Introduce tu nombre de usuario"
+		/>
+	  </div>
+  
+	  <div class="form-control mb-6">
+		<label class="label">
+		  <span class="label-text text-base-content">Contraseña</span>
+		</label>
+		<input
+		  type="password"
+		  class="input input-bordered bg-base-100 text-base-content"
+		  [(ngModel)]="password"
+		  placeholder="Introduce tu contraseña"
+		/>
+	  </div>
+  
+	  <!-- Botón de login con animación de carga -->
+	  <button
+		class="btn btn-primary w-full"
+		[disabled]="isLoading"
+		(click)="login()"
+	  >
+		@if (!isLoading) {
+		  <div>Iniciar sesión</div>
+		} @else {
+		  <div class="loading loading-spinner"></div>
+		}
+	  </button>
+	</div>
+  </div>
+  

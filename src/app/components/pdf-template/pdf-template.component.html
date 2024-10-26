@@ -1,0 +1,40 @@
+<div class="pdf-content">
+	<div *ngFor="let page of data">
+	  <h3 class="title">
+		<span class="day">{{ getDayFromTitle(page.titulo) }}</span>
+		<span class="training">{{ getTrainingFromTitle(page.titulo) }}</span>
+	  </h3>
+	  <div class="subtitle-container">
+		<div class="line"></div>
+		<p class="subtitle">{{ page.subtitulo }}</p>
+	  </div>
+  
+	  <!-- Iterar solo por cada comida (desayuno, almuerzo, cena, etc.) -->
+	  <div
+		class="meal-container"
+		*ngFor="let meal of ['desayuno', 'mediaManana', 'almuerzo', 'mediaTarde', 'cena']; let i = index"
+	  >
+		<ng-container *ngIf="page[meal] && getFilteredProperties(page[meal]).length > 0">
+		  <div class="meal-info">
+			<div class="meal-name-container">
+			  <div
+				class="meal-time"
+				[ngStyle]="{'transform': displayedIndex % 2 === 0 ? 'translate(60%, -90%)' : 'translate(200%, -90%)'}"
+			  >
+				{{ page[meal]?.hora }}
+			  </div>
+			  <div class="meal-name">{{ getMealName(meal) }}</div>
+			</div>
+			<ul class="meal-alimentos">
+			  <li *ngFor="let prop of getFilteredProperties(page[meal])"
+				  [ngStyle]="{'background-color': getBackgroundColor(prop)}">
+				{{ prop | titlecase }}: {{ page[meal][prop] }}
+			  </li>
+			</ul>		  
+		  </div>
+		  <ng-container *ngIf="incrementDisplayedIndex()"></ng-container>
+		</ng-container>
+	  </div>
+	</div>
+  </div>
+  

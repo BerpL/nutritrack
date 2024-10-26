@@ -1,0 +1,123 @@
+<div class="flex flex-col min-h-screen">
+	<div class="navbar bg-base-100 shadow-2xl rounded-full">
+	  <div class="navbar-start">
+		<div class="dropdown">
+		  <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+			<svg
+			  xmlns="http://www.w3.org/2000/svg"
+			  class="h-5 w-5"
+			  fill="none"
+			  viewBox="0 0 24 24"
+			  stroke="currentColor"
+			>
+			  <path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M4 6h16M4 12h8m-8 6h16"
+			  />
+			</svg>
+		  </div>
+		  <ul
+			tabindex="0"
+			class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+		  >
+			<li>
+			  <a
+				routerLink="/main/upload"
+				routerLinkActive="bg-primary text-primary-content"
+				class="hover:bg-primary hover:text-primary-content"
+			  >
+				Subir Archivo
+			  </a>
+			</li>
+			<li>
+			  <a
+				routerLink="/main/form"
+				routerLinkActive="bg-primary text-primary-content"
+				class="hover:bg-primary hover:text-primary-content"
+			  >
+				Formulario
+			  </a>
+			</li>
+		  </ul>
+		</div>
+		<a class="btn btn-ghost text-xl">NutriTrack</a>
+	  </div>
+	  <div class="navbar-center hidden lg:flex">
+		<ul class="menu menu-horizontal px-1">
+		  <li>
+			<a
+			  routerLink="/main/upload"
+			  routerLinkActive="bg-primary text-primary-content"
+			  class="hover:bg-primary hover:text-primary-content"
+			>
+			  Subir Archivo
+			</a>
+		  </li>
+		  <li>
+			<a
+			  routerLink="/main/form"
+			  routerLinkActive="bg-primary text-primary-content"
+			  class="hover:bg-primary hover:text-primary-content"
+			>
+			  Formulario
+			</a>
+		  </li>
+		</ul>
+	  </div>
+	  <div class="navbar-end">
+		<div class="dropdown dropdown-end">
+		  <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+			<div class="w-10 rounded-full">
+			  <img src="https://i.pravatar.cc/100" alt="Avatar del Usuario" />
+			</div>
+		  </div>
+		  <ul
+			tabindex="0"
+			class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+		  >
+			<li><a>{{ username }}</a></li>
+  
+			<!-- Switch para cambiar de tema -->
+			<li>
+			  <label class="cursor-pointer label">
+				<span class="label-text"
+				  >Tema {{ theme === 'winter' ? 'Claro' : 'Oscuro' }}</span
+				>
+				<input
+				  type="checkbox"
+				  class="toggle"
+				  [checked]="theme === 'night'"
+				  (change)="toggleTheme()"
+				/>
+			  </label>
+			</li>
+  
+			<!-- Opción de cerrar sesión en rojo -->
+			<li>
+			  <a class="text-red-600" (click)="confirmLogout()">Cerrar sesión</a>
+			</li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  
+	<!-- Modal de confirmación de cierre de sesión -->
+	<dialog id="logout-modal" class="modal">
+	  <form method="dialog" class="modal-box">
+		<h3 class="font-bold text-lg">¿Estás seguro?</h3>
+		<p class="py-4">¿Deseas cerrar sesión?</p>
+		<div class="modal-action">
+		  <button class="btn btn-outline" (click)="closeModal()">Cancelar</button>
+		  <button class="btn btn-error" (click)="logout()">Cerrar sesión</button>
+		</div>
+	  </form>
+	</dialog>
+  
+	<!-- Espacio para el contenido de las rutas -->
+	<div class="flex-grow px-6 py-10">
+	  <router-outlet></router-outlet>
+	</div>
+  </div>
+  
