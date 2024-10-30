@@ -12,6 +12,7 @@ import { RouterModule, Router } from '@angular/router';
 export class MainComponent implements OnInit {
   username = 'admin'; // Nombre de usuario estático
   theme = 'winter'; // Tema inicial
+  currentYear: number = new Date().getFullYear();
 
   constructor(private router: Router) {}
 

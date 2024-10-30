@@ -1,12 +1,7 @@
 .btn-primary {
-	@apply transition-all ease-in-out duration-300;
-  }
-  
-  .input {
-	@apply transition-shadow focus:shadow-lg;
-  }
-  
-  .loading-spinner {
-	@apply animate-spin h-5 w-5 border-t-4 border-b-4 border-white rounded-full;
-  }
-  
+  @apply transition-all ease-in-out duration-300;
+}
+
+.input {
+  @apply transition-shadow focus:shadow-lg;
+}
