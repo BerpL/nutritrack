@@ -1,95 +1,189 @@
+@font-face {
+	font-family: "Gilroy";
+	src: url("/fonts/Gilroy-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gilroy-Bold";
+	src: url("/fonts/Gilroy-Bold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gilroy-Black";
+	src: url("/fonts/Gilroy-Black.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Gilroy-BoldItalic";
+	src: url("/fonts/Gilroy-BoldItalic.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.title .day,
+.title .training {
+	line-height: 0.5;
+}
+
 .pdf-content {
-	font-family: Arial, sans-serif;
-	color: #333;
-	width: 595px;
+	font-family: "Gilroy", sans-serif;
+	color: #222222;
+	width: 1080px;
+	height: 1920px;
 	margin: 0 auto;
-	padding-top: 1rem;
+	padding-top: 2rem;
+	background-color: #f2f2f2;
+	background-image: url("/img/fondo.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+
 	.title {
-	  text-align: center;
-	  margin-bottom: 20px;
+		text-align: center;
+		font-family: "Gilroy-Black";
+		margin-bottom: 20px;
 
-	  .day {
-		font-size: 22px;
-		font-weight: bold;
-		display: block;
-	  }
+		.day-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
-	  .training {
-		font-size: 18px;
-		font-weight: normal;
-		display: block;
-	  }
+		.day {
+			font-size: 145px;
+			display: inline-block;
+			margin: 0 10px;
+			line-height: 1;
+		}
+
+		.star-icon {
+			margin: 0 3rem 1.5rem 3rem;
+			width: 70px;
+		}
+
+		.training {
+			font-size: 105px;
+			display: block;
+			font-family: "Gilroy-Black";
+			margin-top: 10px;
+		}
 	}
 
 	.subtitle-container {
-	  display: flex;
-	  align-items: center;
-	  justify-content: flex-end;
-	  margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-bottom: 2rem;
 
-	  .subtitle {
-		font-size: 16px;
-		font-weight: bold;
-		white-space: nowrap;
-		text-transform: uppercase;
-		padding-right: 10px;
-		padding-left: 10px;
-	  }
+		.subtitle {
+			font-size: 60px;
+			font-weight: bold;
+			white-space: nowrap;
+			text-transform: uppercase;
+			padding: 0 110px 0 40px;
+		}
 
-	  .line {
-		flex-grow: 1;
-		border-top: 1px solid #333;
-	  }
+		.line {
+			flex-grow: 1;
+			border-top: 2px solid #222222;
+		}
 	}
 
 	.meal-container {
-	  margin: 0 auto 15px;
-	  display: flex;
-	  align-items: center;
-	  flex-direction: row;
-	  max-width: 390px;
-
-	  .meal-info {
+		margin: 0 auto 40px;
 		display: flex;
-		width: 100%;
-	  }
+		align-items: center;
+		flex-direction: row;
+		max-width: 850px;
 
-	  .meal-name-container {
-		position: relative;
-		width: 200px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		color: #fff;
-		margin-right: 3rem;
-		.meal-time {
-		  font-size: 12px;
-		  font-weight: bold;
-		  position: absolute;
-		  transform: translateY(-90%);
+		.meal-info {
+			display: flex;
+			width: 100%;
 		}
 
-		.meal-name {
-		  font-size: 16px;
-		  font-weight: bold;
-		  background-color: black;
-		  border-radius: .5rem;
-		  padding: 1rem 1rem 1rem 3rem;
-		}
-	  }
+		.meal-name-container {
+			position: relative;
+			width: 340px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			color: #fff;
+			margin-right: 6rem;
+			text-transform: uppercase;
+			font-family: "Gilroy-BoldItalic", sans-serif;
 
-	  .meal-alimentos {
-		flex: 1;
-		font-size: 14px;
-		display: flex;
-		flex-direction: column;
+			.meal-time {
+				font-size: 24px;
+				font-weight: bold;
+				position: absolute;
+				transform: translateY(-90%);
+			}
 
-		li {
-		  list-style-type: none;
-		  margin: .2rem;
-		  padding: .2rem .2rem .2rem 1rem;
-		  border-radius: .5rem;
+			/* Alternar imágenes de fondo en .meal-name */
+			.meal-name {
+				font-size: 36px;
+				font-weight: bold;
+				border-radius: 1rem;
+				padding: 3rem 3rem 3rem 8rem; /* Ajusta para aumentar el espacio interno y hacer que la imagen parezca más grande */
+				background-position: center; /* Centra la imagen */
+				background-size: 95%;
+				background-repeat: no-repeat;
+				padding-left: 2rem;
+				text-align: center;
+			}
+
+			.left-background {
+				background-image: url("/img/title-left.svg");
+			}
+
+			.right-background {
+				background-image: url("/img/title-right.svg");
+			}
 		}
-	  }
+
+		.meal-alimentos {
+			flex: 1;
+			font-size: 28px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			font-family: "Gilroy-Bold";
+			font-size: 28px;
+			position: relative;
+			li {
+				height: 80px;
+				list-style-type: none;
+				padding: 0 0.4rem 0 6rem;
+				border-radius: 1rem;
+				display: flex;
+				justify-content: space-between; // Esto separa el prop y el valor
+    			align-items: center;
+				.meal-icon {
+					position: absolute;
+					left: 0;    // Ajusta esta distancia según lo necesites para que quede pegado al borde
+					width: 80px;  // Ajusta el tamaño del icono
+					height: 80px;
+					pointer-events: none; // Para evitar que el icono interfiera con la interacción
+				  }
+				.meal-value {
+					font-family: "Gilroy";
+					background-image: url('/img/circle.svg');
+					background-size: 50px auto;
+					background-repeat: no-repeat;
+					width: 50px;
+					height: 50px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-right: 3rem;
+				  }
+			}
+		}
 	}
-  }
+}

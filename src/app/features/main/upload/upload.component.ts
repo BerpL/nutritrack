@@ -24,6 +24,182 @@ export class UploadComponent implements AfterViewInit {
   data: any[] = []; 
   showReloadButton = false;
   isDownloading = false;
+  test: any = [
+    {
+        "titulo": "Día 1 de entrenamiento",
+        "subtitulo": "Baile",
+        "intercambios": {
+            "hora": "",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "desayuno": {
+            "hora": "9 am",
+            "almidon": 2,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 3,
+            "grasas": 1,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "entrenamiento1": {
+            "hora": "",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "mediaManana": {
+            "hora": "11:30 am",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 1,
+            "lacteoSinGrasa": 1,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "entrenamiento2": {
+            "hora": "",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "almuerzo": {
+            "hora": "2 pm",
+            "almidon": 4,
+            "verduras": 1,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 3,
+            "proteSemiGrasa": 0,
+            "grasas": 1,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "entrenamiento3": {
+            "hora": "",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "mediaTarde": {
+            "hora": "6 pm",
+            "almidon": 3,
+            "verduras": 0,
+            "frutas": 1,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "entrenamiento4": {
+            "hora": "8 pm",
+            "almidon": 0,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 0,
+            "proteSemiGrasa": 0,
+            "grasas": 0,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0.5,
+            "bebida2": 0,
+            "bebida3": 0
+        },
+        "cena": {
+            "hora": "11 pm",
+            "almidon": 2,
+            "verduras": 0,
+            "frutas": 0,
+            "lacteoSinGrasa": 0,
+            "lacteoEntero": 0,
+            "proteMuyMagra": 0,
+            "proteMagra": 3,
+            "proteSemiGrasa": 3,
+            "grasas": 1,
+            "sabrosura": 0,
+            "azucar": 0,
+            "rehidratante": 0,
+            "bebida2": 0,
+            "bebida3": 0
+        }
+    }
+]
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChild('pdfContent', { static: false }) pdfContent!: ElementRef;
 
@@ -180,7 +356,11 @@ export class UploadComponent implements AfterViewInit {
 
   async downloadPDF() {
     this.isDownloading = true; // Mostrar spinner de descarga
-    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdf = new jsPDF({
+      orientation: 'p', // Mantiene la orientación vertical
+      unit: 'px',       // Usa píxeles como unidad
+      format: [1080, 1920] // Establece el tamaño en píxeles: 1080px x 1920px
+    });
   
     for (let i = 0; i < this.excelPagesData.length; i++) {
       this.singlePageData = this.excelPagesData[i]; // Asigna un solo objeto de datos

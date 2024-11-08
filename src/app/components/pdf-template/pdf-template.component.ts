@@ -11,23 +11,6 @@ import { CommonModule } from '@angular/common';
 export class PdfTemplateComponent {
   @Input() data: any = {};
   displayedIndex = 0;
-  // Define un objeto para mapear cada valor a un color específico
-  colorMap: { [key: string]: string } = {
-    almidon: '#FFD700', // Color amarillo para almidón
-    verduras: '#32CD32', // Color verde para verduras
-    frutas: '#FF6347', // Color rojo para frutas
-    lacteoSinGrasa: '#87CEEB', // Color azul claro para lácteo sin grasa
-    lacteoEntero: '#4682B4', // Color azul oscuro para lácteo entero
-    proteMuyMagra: '#D2691E', // Color marrón para proteína muy magra
-    proteMagra: '#8B4513', // Color marrón oscuro para proteína magra
-    proteSemiGrasa: '#A52A2A', // Otro marrón para proteína semi grasa
-    grasas: '#FFA07A', // Color salmón para grasas
-    sabrosura: '#FF69B4', // Color rosa para sabrosura
-    azucar: '#FF4500', // Color naranja para azúcar
-    rehidratante: '#00CED1', // Color turquesa para rehidratante
-    bebida2: '#8A2BE2', // Color púrpura para bebida 2
-    bebida3: '#DA70D6', // Color violeta para bebida 3
-  };
   getMealName(mealKey: string): string {
     const mealNames: any = {
       desayuno: 'Desayuno',
@@ -37,7 +20,7 @@ export class PdfTemplateComponent {
       cena: 'Cena',
     };
     return mealNames[mealKey] || mealKey;
-  }  
+  }
 
   getFilteredProperties(meal: any): string[] {
     return Object.keys(meal).filter((key) => meal[key] !== 0 && key !== 'hora');
@@ -62,8 +45,24 @@ export class PdfTemplateComponent {
     return true;
   }
 
-  // Función para obtener el color según el nombre de la propiedad
-  getBackgroundColor(prop: string): string {
-    return this.colorMap[prop] || '#FFFFFF'; // Color blanco por defecto
-  }
+  getBackgroundAndIcon(alimento: string): { backgroundImage: string; icon: string } {
+    const assetsMap: { [key: string]: { backgroundImage: string; icon: string } } = {
+      almidon: { backgroundImage: '/img/almidon.svg', icon: '/img/icons/almidon-icon.svg' },
+      verduras: { backgroundImage: '/img/verduras.svg', icon: '/img/icons/verduras-icon.svg' },
+      frutas: { backgroundImage: '/img/frutas.svg', icon: '/img/icons/frutas-icon.svg' },
+      lacteoSinGrasa: { backgroundImage: '/img/lacteo.svg', icon: '/img/icons/lacteos-icon.svg' },
+      lacteoEntero: { backgroundImage: '/img/lacteo.svg', icon: '/img/icons/lacteos-icon.svg' },
+      proteMuyMagra: { backgroundImage: '/img/proteMuyMagra.svg', icon: '/img/icons/proteMuyMagra-icon.svg' },
+      proteMagra: { backgroundImage: '/img/proteMagra.svg', icon: '/img/icons/proteMagra-icon.svg' },
+      proteSemiGrasa: { backgroundImage: '/img/proteSemiGrasa.svg', icon: '/img/icons/proteSemiGrasa-icon.svg' },
+      grasas: { backgroundImage: '/img/grasas.svg', icon: '/img/icons/grasas-icon.svg' },
+      sabrosura: { backgroundImage: '/img/azucar.svg', icon: '/img/icons/azucar-icon.svg' },
+      azucar: { backgroundImage: '/img/azucar.svg', icon: '/img/icons/azucar-icon.svg' },
+      rehidratante: { backgroundImage: '/img/rehidratante.svg', icon: '/img/icons/rehidratante-icon.svg' },
+      bebida2: { backgroundImage: '/img/bebida2.svg', icon: '/img/icons/bebida2-icon.svg' },
+      bebida3: { backgroundImage: '/img/bebida3.svg', icon: '/img/icons/bebida3-icon.svg' },
+    };
+  
+    return assetsMap[alimento] || { backgroundImage: '/img/default.svg', icon: '/img/icons/default-icon.svg' };
+  }  
 }
