@@ -24,186 +24,1644 @@ export class UploadComponent implements AfterViewInit {
   data: any[] = []; 
   showReloadButton = false;
   isDownloading = false;
-  test: any = [
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  @ViewChild('pdfContent', { static: false }) pdfContent!: ElementRef;
+  test: any[] = [
     {
         "titulo": "Día 1 de entrenamiento",
-        "subtitulo": "Baile",
-        "intercambios": {
-            "hora": "",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
-        },
+        "subtitulo": "Gym y Lucha",
         "desayuno": {
-            "hora": "9 am",
-            "almidon": 2,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 3,
-            "grasas": 1,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "Desayuno",
+            "hora": "09:00 am",
+            "almidon": {
+                "value": 4,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 1,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 5,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 3,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "entrenamiento1": {
+            "name": "",
             "hora": "",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "mediaManana": {
+            "name": "Media mañana",
             "hora": "11:30 am",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 1,
-            "lacteoSinGrasa": 1,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 2,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 3.5,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 1,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "entrenamiento2": {
-            "hora": "",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "GYM",
+            "hora": "01:00pm",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "almuerzo": {
-            "hora": "2 pm",
-            "almidon": 4,
-            "verduras": 1,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 3,
-            "proteSemiGrasa": 0,
-            "grasas": 1,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "Almuerzo",
+            "hora": "02:00 pm",
+            "almidon": {
+                "value": 7,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 3,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 1,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "entrenamiento3": {
+            "name": "",
             "hora": "",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "mediaTarde": {
-            "hora": "6 pm",
-            "almidon": 3,
-            "verduras": 0,
-            "frutas": 1,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "Media tarde",
+            "hora": "06:00 pm",
+            "almidon": {
+                "value": 1,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 1,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 1,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 1,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "entrenamiento4": {
-            "hora": "8 pm",
-            "almidon": 0,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 0,
-            "proteSemiGrasa": 0,
-            "grasas": 0,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0.5,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "LUCHA",
+            "hora": "07:30pm",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 4,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 1,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         },
         "cena": {
-            "hora": "11 pm",
-            "almidon": 2,
-            "verduras": 0,
-            "frutas": 0,
-            "lacteoSinGrasa": 0,
-            "lacteoEntero": 0,
-            "proteMuyMagra": 0,
-            "proteMagra": 3,
-            "proteSemiGrasa": 3,
-            "grasas": 1,
-            "sabrosura": 0,
-            "azucar": 0,
-            "rehidratante": 0,
-            "bebida2": 0,
-            "bebida3": 0
+            "name": "Cena",
+            "hora": "11:00 pm",
+            "almidon": {
+                "value": 6,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 3,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 2,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 3,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        }
+    },
+    {
+        "titulo": "Día 2 de entrenamiento",
+        "subtitulo": "Gym",
+        "desayuno": {
+            "name": "Desayuno",
+            "hora": "09:00 am",
+            "almidon": {
+                "value": 4,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 1,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 5,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 3,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento1": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "mediaManana": {
+            "name": "Media mañana",
+            "hora": "11:30 am",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 2,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 1,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento2": {
+            "name": "GYM",
+            "hora": "01:00pm",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 1,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "almuerzo": {
+            "name": "Almuerzo",
+            "hora": "02:00 pm",
+            "almidon": {
+                "value": 6,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 4,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento3": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "mediaTarde": {
+            "name": "Media tarde",
+            "hora": "06:00 pm",
+            "almidon": {
+                "value": 1,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 1,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 3.5,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 1,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento4": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "cena": {
+            "name": "Cena",
+            "hora": "11:00 pm",
+            "almidon": {
+                "value": 6,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 3,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 1,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        }
+    },
+    {
+        "titulo": "Día 3 de descanso",
+        "subtitulo": "",
+        "desayuno": {
+            "name": "Desayuno",
+            "hora": "09:00 am",
+            "almidon": {
+                "value": 4,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 5,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento1": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "mediaManana": {
+            "name": "Media mañana",
+            "hora": "11:30 am",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 1,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 1.8,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento2": {
+            "name": "GYM",
+            "hora": "01:00pm",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "almuerzo": {
+            "name": "Almuerzo",
+            "hora": "02:00 pm",
+            "almidon": {
+                "value": 6,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 4,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento3": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "mediaTarde": {
+            "name": "Media tarde",
+            "hora": "06:00 pm",
+            "almidon": {
+                "value": 1,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 2,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 1,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "entrenamiento4": {
+            "name": "",
+            "hora": "",
+            "almidon": {
+                "value": 0,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 0,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 0,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
+        },
+        "cena": {
+            "name": "Cena",
+            "hora": "11:00 pm",
+            "almidon": {
+                "value": 6,
+                "name": "Almidón"
+            },
+            "verduras": {
+                "value": 0,
+                "name": "Verduras"
+            },
+            "frutas": {
+                "value": 0,
+                "name": "Frutas"
+            },
+            "lacteoSinGrasa": {
+                "value": 0,
+                "name": "Lácteo sin grasa"
+            },
+            "lacteoEntero": {
+                "value": 0,
+                "name": "Lácteos enteros"
+            },
+            "proteMuyMagra": {
+                "value": 0,
+                "name": "Prote Muy Magra"
+            },
+            "proteMagra": {
+                "value": 4,
+                "name": "Prote Magra"
+            },
+            "proteSemiGrasa": {
+                "value": 0,
+                "name": "Prote Semi Grasa"
+            },
+            "grasas": {
+                "value": 2,
+                "name": "Grasas"
+            },
+            "sabrosura": {
+                "value": 0,
+                "name": "Sabrosura"
+            },
+            "azucar": {
+                "value": 0,
+                "name": "Azúcar"
+            },
+            "rehidratante": {
+                "value": 0,
+                "name": "Rehidratante"
+            },
+            "bebida2": {
+                "value": 0,
+                "name": "Agua"
+            },
+            "bebida3": {
+                "value": 0,
+                "name": "Chela"
+            }
         }
     }
 ]
-  @ViewChild('fileInput') fileInput!: ElementRef;
-  @ViewChild('pdfContent', { static: false }) pdfContent!: ElementRef;
-
   ngAfterViewInit() {
+    console.log(this.test)
     // Este hook se asegura de que la vista está renderizada
   }
 
@@ -216,9 +1674,8 @@ export class UploadComponent implements AfterViewInit {
       const minutes = correctedTime.getMinutes();
       const period = hours >= 12 ? 'pm' : 'am';
       const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-      const formattedMinutes =
-        minutes === 0 ? '' : `:${minutes.toString().padStart(2, '0')}`;
-      return `${formattedHours}${formattedMinutes} ${period}`;
+      const formattedMinutes = `:${minutes.toString().padStart(2, '0')}`
+      return `${formattedHours.toString().padStart(2, '0')}${formattedMinutes} ${period}`;
     }
     return cellValue || '';
   }
@@ -247,23 +1704,24 @@ export class UploadComponent implements AfterViewInit {
   async readExcel(file: File) {
     this.isLoading = true;
     this.excelPagesData = [];
-
+  
     const reader = new FileReader();
-
+  
     reader.onload = async (event: any) => {
       const buffer = event.target.result;
       const workbook = new ExcelJS.Workbook();
       await workbook.xlsx.load(buffer);
-
+  
       workbook.eachSheet((worksheet) => {
         if (worksheet) {
           const pageData: any = {};
-
+  
+          // Leer el título y subtítulo
           pageData.titulo = worksheet.getCell('B1').value || '';
           pageData.subtitulo = worksheet.getCell('B2').value || '';
-
+  
+          // Definir claves y columnas
           const keys = [
-            'intercambios',
             'desayuno',
             'entrenamiento1',
             'mediaManana',
@@ -274,53 +1732,52 @@ export class UploadComponent implements AfterViewInit {
             'entrenamiento4',
             'cena',
           ];
-          const columns = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
-
+          const columns = ['C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
+  
+          // Agregar campo `name` a las claves principales
           keys.forEach((key, index) => {
             const col = columns[index];
             pageData[key] = {
+              name: worksheet.getCell(`${col}4`).value?.toString().trim() || '', // Nombre dinámico desde la fila 4
               hora: this.formatTime(worksheet.getCell(`${col}3`).value),
-              almidon: this.ensureNumber(worksheet.getCell(`${col}5`).value),
-              verduras: this.ensureNumber(worksheet.getCell(`${col}6`).value),
-              frutas: this.ensureNumber(worksheet.getCell(`${col}7`).value),
-              lacteoSinGrasa: this.ensureNumber(
-                worksheet.getCell(`${col}9`).value
-              ),
-              lacteoEntero: this.ensureNumber(
-                worksheet.getCell(`${col}10}`).value
-              ),
-              proteMuyMagra: this.ensureNumber(
-                worksheet.getCell(`${col}12}`).value
-              ),
-              proteMagra: this.ensureNumber(
-                worksheet.getCell(`${col}13}`).value
-              ),
-              proteSemiGrasa: this.ensureNumber(
-                worksheet.getCell(`${col}14}`).value
-              ),
-              grasas: this.ensureNumber(worksheet.getCell(`${col}16}`).value),
-              sabrosura: this.ensureNumber(
-                worksheet.getCell(`${col}18}`).value
-              ),
-              azucar: this.ensureNumber(worksheet.getCell(`${col}19}`).value),
-              rehidratante: this.ensureNumber(
-                worksheet.getCell(`${col}21}`).value
-              ),
-              bebida2: this.ensureNumber(worksheet.getCell(`${col}22}`).value),
-              bebida3: this.ensureNumber(worksheet.getCell(`${col}23}`).value),
             };
+  
+            // Agregar propiedades internas con nombres desde la columna A
+            const propertyRows = [
+              { key: 'almidon', row: 5 },
+              { key: 'verduras', row: 6 },
+              { key: 'frutas', row: 7 },
+              { key: 'lacteoSinGrasa', row: 9 },
+              { key: 'lacteoEntero', row: 10 },
+              { key: 'proteMuyMagra', row: 12 },
+              { key: 'proteMagra', row: 13 },
+              { key: 'proteSemiGrasa', row: 14 },
+              { key: 'grasas', row: 16 },
+              { key: 'sabrosura', row: 18 },
+              { key: 'azucar', row: 19 },
+              { key: 'rehidratante', row: 21 },
+              { key: 'bebida2', row: 22 },
+              { key: 'bebida3', row: 23 },
+            ];
+  
+            propertyRows.forEach((prop) => {
+              pageData[key][prop.key] = {
+                value: this.ensureNumber(worksheet.getCell(`${col}${prop.row}`).value), // Valor numérico
+                name: worksheet.getCell(`A${prop.row}`).value?.toString().trim() || '', // Nombre dinámico desde la columna A
+              };
+            });
           });
-
+  
           this.excelPagesData.push(pageData);
         }
       });
-
+  
       this.isLoading = false;
       console.log('Datos del Excel por página/hoja:', this.excelPagesData);
     };
-
+  
     reader.readAsArrayBuffer(file);
-  }
+  }  
 
   processExcel() {
     this.isLoading = true;

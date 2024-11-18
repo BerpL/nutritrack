@@ -37,7 +37,7 @@
 	width: 1080px;
 	height: 1920px;
 	margin: 0 auto;
-	padding-top: 2rem;
+	padding-top: 8rem;
 	background-color: #f2f2f2;
 	background-image: url("/img/fondo.svg");
 	background-size: cover;
@@ -101,6 +101,7 @@
 		align-items: center;
 		flex-direction: row;
 		max-width: 850px;
+		position: relative;
 
 		.meal-info {
 			display: flex;
@@ -119,14 +120,18 @@
 			font-family: "Gilroy-BoldItalic", sans-serif;
 
 			.meal-time {
-				font-size: 24px;
+				font-size: 20px;
 				font-weight: bold;
 				position: absolute;
-				transform: translateY(-90%);
+				top: 50px;
+				color: #bca133;
 			}
-
 			/* Alternar imágenes de fondo en .meal-name */
 			.meal-name {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 204px;
 				font-size: 36px;
 				font-weight: bold;
 				border-radius: 1rem;
@@ -137,53 +142,123 @@
 				padding-left: 2rem;
 				text-align: center;
 			}
-
+			.meal-name-format {
+				height: 204px;
+				width: 340px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
 			.left-background {
 				background-image: url("/img/title-left.svg");
+				.meal-time{
+					left: 30px;
+					transform: rotate(-15deg);
+				}
 			}
 
 			.right-background {
 				background-image: url("/img/title-right.svg");
+				.meal-time{
+					right: 30px;
+					transform: rotate(15deg);
+				}
 			}
 		}
 
 		.meal-alimentos {
 			flex: 1;
-			font-size: 28px;
+			font-size: 26px;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			font-family: "Gilroy-Bold";
-			font-size: 28px;
 			position: relative;
 			li {
-				height: 80px;
+				height: 55px;
 				list-style-type: none;
-				padding: 0 0.4rem 0 6rem;
+				padding: 0 0.4rem 0 5.2rem;
 				border-radius: 1rem;
 				display: flex;
 				justify-content: space-between; // Esto separa el prop y el valor
-    			align-items: center;
+				align-items: center;
+				.meal-title {
+					margin-bottom: 0.3rem;
+					width: 100%;
+					display: flex;
+					justify-content: center;
+				}
 				.meal-icon {
 					position: absolute;
-					left: 0;    // Ajusta esta distancia según lo necesites para que quede pegado al borde
-					width: 80px;  // Ajusta el tamaño del icono
-					height: 80px;
-					pointer-events: none; // Para evitar que el icono interfiera con la interacción
-				  }
-				.meal-value {
-					font-family: "Gilroy";
-					background-image: url('/img/circle.svg');
-					background-size: 50px auto;
-					background-repeat: no-repeat;
-					width: 50px;
+					left: 25px; // Ajusta esta distancia según lo necesites para que quede pegado al borde
+					width: 50px; // Ajusta el tamaño del icono
 					height: 50px;
+					pointer-events: none; // Para evitar que el icono interfiera con la interacción
+				}
+				.meal-value {
+					font-family: "Gilroy-Bold";
+					background-image: url("/img/circle.svg");
+					background-size: 25px auto;
+					background-repeat: no-repeat;
+					width: 35px;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					margin-right: 3rem;
-				  }
+					margin-right: 3.5rem;
+					font-size: 18px;
+				}
 			}
 		}
+	}
+
+	.training-container {
+		position: absolute;
+		left: 35%;
+		transform: translateX(-50%);
+		z-index: 10;
+		padding: 10px;
+		text-align: center;
+		font-family: "Gilroy-BoldItalic", sans-serif;
+		text-transform: uppercase;
+		font-size: 24px;
+		display: flex;
+		margin-bottom: 2.5rem;
+		.training-details {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			.training-name {
+				display: flex;
+				align-items: flex-start;
+			}
+		}
+		.training-label {
+			color: #2c2c2c;
+			font-size: 18px;
+			margin-left: 5rem;
+			padding: 10px;
+			background-image: url("/img/training.svg"); /* Ruta a la imagen */
+			background-size: cover; /* Ajusta el fondo para que cubra todo el contenedor */
+			background-repeat: no-repeat; /* Evita que la imagen se repita */
+			background-position: center; /* Centra la imagen en el contenedor */
+			width: 200px; /* Ajusta el tamaño del contenedor según el diseño */
+			height: 100px; /* Ajusta la altura del contenedor */
+		}
+	}
+	.training-label.small-spacing {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		white-space: pre-wrap; /* Conserva los saltos de línea */
+		line-height: 1; /* Reduce el espacio entre líneas */
+		font-family: inherit; /* Usa la misma fuente que el diseño */
+		font-size: 0.9rem; /* Ajusta el tamaño si es necesario */
+		margin: 0; /* Elimina márgenes adicionales */
+		padding: 0; /* Elimina cualquier relleno */
+		text-transform: none; /* Asegurar minúsculas */
+	}
+
+	.training-margin {
+		margin: 0 !important;
 	}
 }

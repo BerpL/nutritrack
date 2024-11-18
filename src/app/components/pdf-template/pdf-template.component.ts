@@ -11,33 +11,36 @@ import { CommonModule } from '@angular/common';
 export class PdfTemplateComponent {
   @Input() data: any = {};
   displayedIndex = 0;
-  getMealName(mealKey: string): string {
-    const mealNames: any = {
-      desayuno: 'Desayuno',
-      mediaManana: 'Media mañana',
-      almuerzo: 'Almuerzo',
-      mediaTarde: 'Media tarde',
-      cena: 'Cena',
-    };
-    return mealNames[mealKey] || mealKey;
+
+  // Obtener el nombre de la comida o la clave si no existe el nombre
+  getMealName(mealKey: string, page: any): string {
+    return page[mealKey]?.name || mealKey;
   }
 
+  // Obtener las propiedades filtradas de una comida
   getFilteredProperties(meal: any): string[] {
-    return Object.keys(meal).filter((key) => meal[key] !== 0 && key !== 'hora');
+    return Object.keys(meal).filter(
+      (key) => meal[key]?.value !== 0 && key !== 'hora' && key !== 'name'
+    );
   }
 
+  // Verificar si una comida tiene valores
   hasValues(meal: any): boolean {
-    return Object.keys(meal).some((key) => meal[key] !== 0 && key !== 'hora');
+    return Object.keys(meal).some(
+      (key) => meal[key]?.value !== 0 && key !== 'hora' && key !== 'name'
+    );
   }
 
+  // Obtener el día desde el título
   getDayFromTitle(title: string | undefined): string {
-    if (!title) return ''; // Si `title` es undefined, devolver cadena vacía
-    const dayMatch = title.match(/Día \d+/i); // Buscar "Día n"
+    if (!title) return '';
+    const dayMatch = title.match(/Día \d+/i);
     return dayMatch ? dayMatch[0] : title;
   }
 
+  // Obtener "de entrenamiento" desde el título
   getTrainingFromTitle(title: string | undefined): string {
-    return title ? 'de entrenamiento' : ''; // Si `title` es undefined, devolver cadena vacía
+    return title ? 'de entrenamiento' : '';
   }
 
   incrementDisplayedIndex(): boolean {
@@ -45,6 +48,7 @@ export class PdfTemplateComponent {
     return true;
   }
 
+  // Obtener el fondo y el icono para un alimento
   getBackgroundAndIcon(alimento: string): { backgroundImage: string; icon: string } {
     const assetsMap: { [key: string]: { backgroundImage: string; icon: string } } = {
       almidon: { backgroundImage: '/img/almidon.svg', icon: '/img/icons/almidon-icon.svg' },
@@ -61,8 +65,77 @@ export class PdfTemplateComponent {
       rehidratante: { backgroundImage: '/img/rehidratante.svg', icon: '/img/icons/rehidratante-icon.svg' },
       bebida2: { backgroundImage: '/img/bebida2.svg', icon: '/img/icons/bebida2-icon.svg' },
       bebida3: { backgroundImage: '/img/bebida3.svg', icon: '/img/icons/bebida3-icon.svg' },
+      bebida4: { backgroundImage: '/img/bebida4.svg', icon: '/img/icons/bebida4-icon.svg' },
+      bebida5: { backgroundImage: '/img/bebida5.svg', icon: '/img/icons/bebida5-icon.svg' },
     };
-  
-    return assetsMap[alimento] || { backgroundImage: '/img/default.svg', icon: '/img/icons/default-icon.svg' };
-  }  
+
+    return (
+      assetsMap[alimento] || {
+        backgroundImage: '/img/default.svg',
+        icon: '/img/icons/default-icon.svg',
+      }
+    );
+  }
+
+  // Obtener la lista de comidas y entrenamientos en orden
+  getOrderedMealsAndTrainings(page: any): { key: string; isTraining: boolean }[] {
+    const meals = ['desayuno', 'mediaManana', 'almuerzo', 'mediaTarde', 'cena'];
+    const trainings = Object.keys(page).filter((key) => key.startsWith('entrenamiento'));
+    const result: { key: string; isTraining: boolean }[] = [];
+
+    let trainingIndex = 0;
+    meals.forEach((meal) => {
+      if (page[meal] && this.getFilteredProperties(page[meal]).length > 0) {
+        result.push({ key: meal, isTraining: false });
+      }
+      if (trainings[trainingIndex] && page[trainings[trainingIndex]]) {
+        result.push({ key: trainings[trainingIndex], isTraining: true });
+        trainingIndex++;
+      }
+    });
+
+    while (trainingIndex < trainings.length) {
+      result.push({ key: trainings[trainingIndex], isTraining: true });
+      trainingIndex++;
+    }
+
+    return result;
+  }
+
+  // Formatear los detalles de las comidas
+  getFormattedDetailMeal(item: any): string {
+    if (!item) {
+      return '';
+    }
+
+    const liquids = ['rehidratante', 'bebida2', 'bebida3', 'bebida4', 'bebida5'];
+    const solidEntries: string[] = [];
+    const liquidEntries: string[] = [];
+
+    for (const key in item) {
+      if (item[key]?.value && item[key]?.value > 0) {
+        const value = item[key]?.value;
+        const name = item[key]?.name?.toLowerCase() ?? '';
+        if (liquids.includes(key)) {
+          liquidEntries.push(`${value}L de \n${name}`);
+        } else {
+          solidEntries.push(`${value}g de ${name}`);
+        }
+      }
+    }
+
+    const combinedEntries = [...liquidEntries, ...solidEntries];
+    return combinedEntries.join('\n+\n');
+  }
+
+  // Filtrar solo los elementos no entrenamiento
+  getNonTrainingItems(page: any): { key: string; isTraining: boolean }[] {
+    return this.getOrderedMealsAndTrainings(page).filter((item) => !item.isTraining);
+  }
+
+  // Obtener el índice correcto para los elementos no entrenamiento
+  getNonTrainingIndex(key: string, page: any): number {
+    const nonTrainingItems = this.getNonTrainingItems(page);
+    return nonTrainingItems.findIndex((item) => item.key === key);
+  }
 }
