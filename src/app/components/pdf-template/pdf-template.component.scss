@@ -95,6 +95,22 @@
 		}
 	}
 
+	.meal-connector {
+		position: absolute;
+		top: 75%; /* Coloca la línea debajo del meal-container actual */
+		left: 45%;
+		transform: translateX(-150%);
+		z-index: -1; /* Asegura que la línea quede detrás de los meal-containers */
+		width: 40px;
+		display: flex;
+		justify-content: center;
+	  
+		img {
+		  width: auto;
+		  height: 100%; /* Asegura que la línea SVG se ajuste a la altura definida */
+		}
+	}
+
 	.meal-container {
 		margin: 0 auto 40px;
 		display: flex;
@@ -102,7 +118,7 @@
 		flex-direction: row;
 		max-width: 850px;
 		position: relative;
-
+		z-index: 10;
 		.meal-info {
 			display: flex;
 			width: 100%;
@@ -110,7 +126,7 @@
 
 		.meal-name-container {
 			position: relative;
-			width: 340px;
+			width: 380px;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -120,19 +136,22 @@
 			font-family: "Gilroy-BoldItalic", sans-serif;
 
 			.meal-time {
-				font-size: 20px;
+				font-size: 28px;
 				font-weight: bold;
 				position: absolute;
-				top: 55px;
-				color: #bca133;
+				top: 60px;
+				color: #d19a49; /* Color dorado sólido */
+				line-height: 1;
+				white-space: nowrap; /* Evita saltos de línea no deseados */
 			}
 			/* Alternar imágenes de fondo en .meal-name */
 			.meal-name {
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				position: relative;
 				height: 204px;
-				font-size: 36px;
+				font-size: 40px;
 				font-weight: bold;
 				border-radius: 1rem;
 				padding: 3rem 3rem 3rem 8rem; /* Ajusta para aumentar el espacio interno y hacer que la imagen parezca más grande */
@@ -144,23 +163,49 @@
 			}
 			.meal-name-format {
 				height: 204px;
-				width: 340px;
+				width: 185px;
 				display: flex;
-				align-items: center;
+				flex-direction: column; /* Coloca las palabras en líneas separadas */
 				justify-content: center;
+				align-items: center; /* Centra las palabras */
+				padding-top: 1.5rem;
+				text-align: center; /* Centro para casos de una palabra */
+				gap: 0.5rem; /* Espacio pequeño entre las palabras */
+				line-height: 1.1;
+				/* Estilo para las palabras separadas */
+				span {
+					display: inline-block;
+					width: 100%; /* Ocupa todo el ancho disponible */
+				}
+
+				.first-word {
+					text-align: left; /* Alinear la primera palabra a la izquierda */
+					margin-bottom: -0.3rem; /* Ajusta el margen inferior */
+				}
+
+				.second-word {
+					text-align: right; /* Alinear la segunda palabra a la derecha */
+					margin-top: -0.3rem; /* Ajusta el margen superior */
+				}
+
+				&.single-word {
+					flex-direction: row; /* Cambia a fila para centrar una sola palabra */
+					text-align: center;
+				}
 			}
+
 			.left-background {
 				background-image: url("/img/title-left.svg");
-				.meal-time{
-					left: 30px;
+				.meal-time {
+					left: 35px;
 					transform: rotate(-15deg);
 				}
 			}
 
 			.right-background {
 				background-image: url("/img/title-right.svg");
-				.meal-time{
-					right: 30px;
+				.meal-time {
+					right: 35px;
 					transform: rotate(15deg);
 				}
 			}
@@ -177,7 +222,7 @@
 			li {
 				height: 55px;
 				list-style-type: none;
-				padding: 0 0.4rem 0 5.2rem;
+				padding: 0 0.4rem 0 3rem;
 				border-radius: 1rem;
 				display: flex;
 				justify-content: space-between; // Esto separa el prop y el valor
@@ -190,7 +235,7 @@
 				}
 				.meal-icon {
 					position: absolute;
-					left: 25px; // Ajusta esta distancia según lo necesites para que quede pegado al borde
+					left: 10px; // Ajusta esta distancia según lo necesites para que quede pegado al borde
 					width: 50px; // Ajusta el tamaño del icono
 					height: 50px;
 					pointer-events: none; // Para evitar que el icono interfiera con la interacción
@@ -204,7 +249,7 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					margin-right: 3.5rem;
+					margin-right: 2rem;
 					font-size: 18px;
 				}
 			}

@@ -16,69 +16,98 @@
 
     <!-- Iterar comidas y entrenamientos -->
     <div
-  class="meal-container"
-  *ngFor="let item of getOrderedMealsAndTrainings(page); let i = index"
-  [ngClass]="{ 'training-margin': item.isTraining }"
->
-  <!-- Comidas -->
-  <ng-container *ngIf="!item.isTraining">
-    <div class="meal-info">
-      <div class="meal-name-container">
-        <div
-          class="meal-name"
-          [ngClass]="{ 'left-background': getNonTrainingIndex(item.key, page) % 2 === 0, 'right-background': getNonTrainingIndex(item.key, page) % 2 !== 0 }"
-        >
-          <div class="meal-name-format">
-            {{ getMealName(item.key, page) }}
+      class="meal-container"
+      *ngFor="let item of getOrderedMealsAndTrainings(page); let i = index"
+      [ngClass]="{ 'training-margin': item.isTraining }"
+    >
+      <!-- Comidas -->
+      <ng-container *ngIf="!item.isTraining">
+        <div class="meal-info">
+          <div class="meal-name-container">
+            <div
+              class="meal-name"
+              [ngClass]="{ 'left-background': getNonTrainingIndex(item.key, page) % 2 === 0, 'right-background': getNonTrainingIndex(item.key, page) % 2 !== 0 }"
+            >
+              <div
+                class="meal-name-format"
+                [ngClass]="{ 'single-word': isSingleWord(getMealName(item.key, page)) }"
+              >
+                <span *ngIf="isSingleWord(getMealName(item.key, page))">
+                  {{ getMealName(item.key, page) }}
+                </span>
+                <ng-container
+                  *ngIf="!isSingleWord(getMealName(item.key, page))"
+                >
+                  <span class="first-word"
+                    >{{ getFirstWord(getMealName(item.key, page)) }}</span
+                  >
+                  <span class="second-word"
+                    >{{ getSecondWord(getMealName(item.key, page)) }}</span
+                  >
+                </ng-container>
+              </div>
+              <!-- Línea SVG entre comidas -->
+              <div
+                class="meal-connector"
+                *ngIf="
+            i < getOrderedMealsAndTrainings(page).length - 1"
+              >
+                <img src="/img/line.svg" alt="line connector" />
+              </div>
+              <span class="meal-time" *ngIf="page[item.key]?.hora">
+                {{ page[item.key]?.hora }}
+              </span>
+            </div>
           </div>
-          <span class="meal-time" *ngIf="page[item.key]?.hora">
-            {{ page[item.key]?.hora }}
-          </span>
-        </div>
-      </div>
-      <ul class="meal-alimentos">
-        <li
-          *ngFor="let prop of getFilteredProperties(page[item.key])"
-          [ngStyle]="{
+          <ul class="meal-alimentos">
+            <li
+              *ngFor="let prop of getFilteredProperties(page[item.key])"
+              [ngStyle]="{
             'background-image': 'url(' + getBackgroundAndIcon(prop).backgroundImage + ')',
             'background-size': '400px auto',
             'background-repeat': 'no-repeat',
             'background-position': 'center center'
           }"
-        >
-          <img
-            [src]="getBackgroundAndIcon(prop).icon"
-            alt="{{ page[item.key][prop]?.name }} icon"
-            class="meal-icon"
-          />
-          <div class="meal-title">
-            {{ page[item.key][prop]?.name }}
-          </div>
-          <span class="meal-value">
-            {{ page[item.key][prop]?.value }}
-          </span>
-        </li>
-      </ul>
-    </div>
-  </ng-container>
-
-  <!-- Entrenamientos -->
-  <ng-container *ngIf="item.isTraining && getFilteredProperties(page[item.key]) && page[item.key]?.name">
-    <div class="training-container">
-      <div class="training-details">
-        <span>{{ page[item.key]?.hora }}</span>
-        <div class="training-name">
-          <img src="/img/star.svg" alt="star" width="25" />
-          <span>{{ page[item.key]?.name }}</span>
+            >
+              <img
+                [src]="page[item.key][prop]?.icon ? page[item.key][prop]?.icon : getBackgroundAndIcon(prop).icon"
+                alt="{{ page[item.key][prop]?.name }} icon"
+                class="meal-icon"
+              />
+              <div class="meal-title">
+                {{ page[item.key][prop]?.name }}
+              </div>
+              <span class="meal-value">
+                {{ page[item.key][prop]?.value }}
+              </span>
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="training-label small-spacing" *ngIf="getFormattedDetailMeal(page[item.key])">
-        {{ getFormattedDetailMeal(page[item.key]) }}
-      </div>
+      </ng-container>
+
+      <!-- Entrenamientos -->
+      <ng-container
+        *ngIf="item.isTraining && getFilteredProperties(page[item.key]) && page[item.key]?.name"
+      >
+        <div class="training-container">
+          <div class="training-details">
+            <span>{{ page[item.key]?.hora }}</span>
+            <div class="training-name">
+              <img src="/img/star.svg" alt="star" width="25" />
+              <span>{{ page[item.key]?.name }}</span>
+            </div>
+          </div>
+          <div
+            class="training-label small-spacing"
+            *ngIf="getFormattedDetailMeal(page[item.key]); else noTrainingInfo"
+          >
+            {{ getFormattedDetailMeal(page[item.key]) }}
+          </div>
+          <ng-template #noTrainingInfo>
+            <div class="training-label small-spacing invisible"></div>
+          </ng-template>
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
-</div>
-
-
   </div>
 </div>

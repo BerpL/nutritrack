@@ -24,6 +24,20 @@ export class PdfTemplateComponent {
     );
   }
 
+  isSingleWord(text: string): boolean {
+    return text.trim().split(' ').length === 1; // Verifica si hay solo una palabra
+  }
+  
+  getFirstWord(text: string): string {
+    return text.split(' ')[0] || ''; // Retorna la primera palabra
+  }
+  
+  getSecondWord(text: string): string {
+    const words = text.split(' ');
+    return words.length > 1 ? words[1] : ''; // Retorna la segunda palabra si existe
+  }
+  
+
   // Verificar si una comida tiene valores
   hasValues(meal: any): boolean {
     return Object.keys(meal).some(
