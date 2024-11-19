@@ -11,7 +11,7 @@
 
     <div class="subtitle-container">
       <div class="line"></div>
-      <p class="subtitle">{{ page.subtitulo }}</p>
+      <p class="subtitle" *ngIf="page.subtitulo">{{ page.subtitulo }}</p>
     </div>
 
     <!-- Iterar comidas y entrenamientos -->

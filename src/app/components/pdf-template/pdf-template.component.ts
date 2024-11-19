@@ -27,16 +27,15 @@ export class PdfTemplateComponent {
   isSingleWord(text: string): boolean {
     return text.trim().split(' ').length === 1; // Verifica si hay solo una palabra
   }
-  
+
   getFirstWord(text: string): string {
     return text.split(' ')[0] || ''; // Retorna la primera palabra
   }
-  
+
   getSecondWord(text: string): string {
     const words = text.split(' ');
     return words.length > 1 ? words[1] : ''; // Retorna la segunda palabra si existe
   }
-  
 
   // Verificar si una comida tiene valores
   hasValues(meal: any): boolean {
@@ -45,16 +44,18 @@ export class PdfTemplateComponent {
     );
   }
 
-  // Obtener el día desde el título
+  // Obtener "Día X" desde el título
   getDayFromTitle(title: string | undefined): string {
     if (!title) return '';
-    const dayMatch = title.match(/Día \d+/i);
-    return dayMatch ? dayMatch[0] : title;
+    const dayMatch = title.match(/Día \d+/i); // Busca "Día X" en el título
+    return dayMatch ? dayMatch[0] : '';
   }
 
-  // Obtener "de entrenamiento" desde el título
+  // Obtener la descripción desde el título (por ejemplo, "de descanso" o "de entrenamiento")
   getTrainingFromTitle(title: string | undefined): string {
-    return title ? 'de entrenamiento' : '';
+    if (!title) return '';
+    const descriptionMatch = title.replace(/Día \d+/i, '').trim(); // Remueve "Día X" y extrae el resto
+    return descriptionMatch;
   }
 
   incrementDisplayedIndex(): boolean {
@@ -63,24 +64,77 @@ export class PdfTemplateComponent {
   }
 
   // Obtener el fondo y el icono para un alimento
-  getBackgroundAndIcon(alimento: string): { backgroundImage: string; icon: string } {
-    const assetsMap: { [key: string]: { backgroundImage: string; icon: string } } = {
-      almidon: { backgroundImage: '/img/almidon.svg', icon: '/img/icons/almidon-icon.svg' },
-      verduras: { backgroundImage: '/img/verduras.svg', icon: '/img/icons/verduras-icon.svg' },
-      frutas: { backgroundImage: '/img/frutas.svg', icon: '/img/icons/frutas-icon.svg' },
-      lacteoSinGrasa: { backgroundImage: '/img/lacteo.svg', icon: '/img/icons/lacteos-icon.svg' },
-      lacteoEntero: { backgroundImage: '/img/lacteo.svg', icon: '/img/icons/lacteos-icon.svg' },
-      proteMuyMagra: { backgroundImage: '/img/proteMuyMagra.svg', icon: '/img/icons/proteMuyMagra-icon.svg' },
-      proteMagra: { backgroundImage: '/img/proteMagra.svg', icon: '/img/icons/proteMagra-icon.svg' },
-      proteSemiGrasa: { backgroundImage: '/img/proteSemiGrasa.svg', icon: '/img/icons/proteSemiGrasa-icon.svg' },
-      grasas: { backgroundImage: '/img/grasas.svg', icon: '/img/icons/grasas-icon.svg' },
-      sabrosura: { backgroundImage: '/img/azucar.svg', icon: '/img/icons/azucar-icon.svg' },
-      azucar: { backgroundImage: '/img/azucar.svg', icon: '/img/icons/azucar-icon.svg' },
-      rehidratante: { backgroundImage: '/img/rehidratante.svg', icon: '/img/icons/rehidratante-icon.svg' },
-      bebida2: { backgroundImage: '/img/bebida2.svg', icon: '/img/icons/bebida2-icon.svg' },
-      bebida3: { backgroundImage: '/img/bebida3.svg', icon: '/img/icons/bebida3-icon.svg' },
-      bebida4: { backgroundImage: '/img/bebida4.svg', icon: '/img/icons/bebida4-icon.svg' },
-      bebida5: { backgroundImage: '/img/bebida5.svg', icon: '/img/icons/bebida5-icon.svg' },
+  getBackgroundAndIcon(alimento: string): {
+    backgroundImage: string;
+    icon: string;
+  } {
+    const assetsMap: {
+      [key: string]: { backgroundImage: string; icon: string };
+    } = {
+      almidon: {
+        backgroundImage: '/img/almidon.svg',
+        icon: '/img/icons/almidon-icon.svg',
+      },
+      verduras: {
+        backgroundImage: '/img/verduras.svg',
+        icon: '/img/icons/verduras-icon.svg',
+      },
+      frutas: {
+        backgroundImage: '/img/frutas.svg',
+        icon: '/img/icons/frutas-icon.svg',
+      },
+      lacteoSinGrasa: {
+        backgroundImage: '/img/lacteo.svg',
+        icon: '/img/icons/lacteos-icon.svg',
+      },
+      lacteoEntero: {
+        backgroundImage: '/img/lacteo.svg',
+        icon: '/img/icons/lacteos-icon.svg',
+      },
+      proteMuyMagra: {
+        backgroundImage: '/img/proteMuyMagra.svg',
+        icon: '/img/icons/proteMuyMagra-icon.svg',
+      },
+      proteMagra: {
+        backgroundImage: '/img/proteMagra.svg',
+        icon: '/img/icons/proteMagra-icon.svg',
+      },
+      proteSemiGrasa: {
+        backgroundImage: '/img/proteSemiGrasa.svg',
+        icon: '/img/icons/proteSemiGrasa-icon.svg',
+      },
+      grasas: {
+        backgroundImage: '/img/grasas.svg',
+        icon: '/img/icons/grasas-icon.svg',
+      },
+      sabrosura: {
+        backgroundImage: '/img/azucar.svg',
+        icon: '/img/icons/azucar-icon.svg',
+      },
+      azucar: {
+        backgroundImage: '/img/azucar.svg',
+        icon: '/img/icons/azucar-icon.svg',
+      },
+      rehidratante: {
+        backgroundImage: '/img/rehidratante.svg',
+        icon: '/img/icons/rehidratante-icon.svg',
+      },
+      bebida2: {
+        backgroundImage: '/img/bebida2.svg',
+        icon: '/img/icons/bebida2-icon.svg',
+      },
+      bebida3: {
+        backgroundImage: '/img/bebida3.svg',
+        icon: '/img/icons/bebida3-icon.svg',
+      },
+      bebida4: {
+        backgroundImage: '/img/bebida4.svg',
+        icon: '/img/icons/bebida4-icon.svg',
+      },
+      bebida5: {
+        backgroundImage: '/img/bebida5.svg',
+        icon: '/img/icons/bebida5-icon.svg',
+      },
     };
 
     return (
@@ -92,9 +146,13 @@ export class PdfTemplateComponent {
   }
 
   // Obtener la lista de comidas y entrenamientos en orden
-  getOrderedMealsAndTrainings(page: any): { key: string; isTraining: boolean }[] {
+  getOrderedMealsAndTrainings(
+    page: any
+  ): { key: string; isTraining: boolean }[] {
     const meals = ['desayuno', 'mediaManana', 'almuerzo', 'mediaTarde', 'cena'];
-    const trainings = Object.keys(page).filter((key) => key.startsWith('entrenamiento'));
+    const trainings = Object.keys(page).filter((key) =>
+      key.startsWith('entrenamiento')
+    );
     const result: { key: string; isTraining: boolean }[] = [];
 
     let trainingIndex = 0;
@@ -122,7 +180,13 @@ export class PdfTemplateComponent {
       return '';
     }
 
-    const liquids = ['rehidratante', 'bebida2', 'bebida3', 'bebida4', 'bebida5'];
+    const liquids = [
+      'rehidratante',
+      'bebida2',
+      'bebida3',
+      'bebida4',
+      'bebida5',
+    ];
     const solidEntries: string[] = [];
     const liquidEntries: string[] = [];
 
@@ -144,7 +208,9 @@ export class PdfTemplateComponent {
 
   // Filtrar solo los elementos no entrenamiento
   getNonTrainingItems(page: any): { key: string; isTraining: boolean }[] {
-    return this.getOrderedMealsAndTrainings(page).filter((item) => !item.isTraining);
+    return this.getOrderedMealsAndTrainings(page).filter(
+      (item) => !item.isTraining
+    );
   }
 
   // Obtener el índice correcto para los elementos no entrenamiento
