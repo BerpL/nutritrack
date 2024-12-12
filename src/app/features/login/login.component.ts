@@ -15,9 +15,11 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
 
-  // Usuario y contraseña de ejemplo
-  validUsername = 'admin';
-  validPassword = '1234567890';
+  // Lista de usuarios válidos
+  validUsers = [
+    { username: 'alejandro', password: 'casa1461' },
+    { username: 'asistente', password: 'asistente1461' },
+  ];
 
   constructor(private router: Router) {}
 
@@ -26,11 +28,17 @@ export class LoginComponent {
     this.isLoading = true;
 
     setTimeout(() => {
-      if (
-        this.username === this.validUsername &&
-        this.password === this.validPassword
-      ) {
-        localStorage.setItem('token', 'dummy-token'); // Guardar token
+      // Verificar si el usuario y la contraseña son válidos
+      const userExists = this.validUsers.some(
+        (user) =>
+          user.username === this.username && user.password === this.password
+      );
+
+      if (userExists) {
+        // Guardar el token y el nombre de usuario en localStorage
+        localStorage.setItem('token', 'dummy-token'); // Token ficticio
+        localStorage.setItem('username', this.username); // Guardar nombre de usuario
+
         this.isLoading = false; // Detener carga antes de redirigir
         this.router.navigate(['/main']); // Redirigir a /main
       } else {

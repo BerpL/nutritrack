@@ -116,23 +116,23 @@ export class PdfTemplateComponent {
         icon: '/img/icons/azucar-icon.svg',
       },
       rehidratante: {
-        backgroundImage: '/img/rehidratante.svg',
+        backgroundImage: '/img/bebida.svg',
         icon: '/img/icons/rehidratante-icon.svg',
       },
       bebida2: {
-        backgroundImage: '/img/bebida2.svg',
+        backgroundImage: '/img/bebida.svg',
         icon: '/img/icons/bebida2-icon.svg',
       },
       bebida3: {
-        backgroundImage: '/img/bebida3.svg',
+        backgroundImage: '/img/bebida.svg',
         icon: '/img/icons/bebida3-icon.svg',
       },
       bebida4: {
-        backgroundImage: '/img/bebida4.svg',
+        backgroundImage: '/img/bebida.svg',
         icon: '/img/icons/bebida4-icon.svg',
       },
       bebida5: {
-        backgroundImage: '/img/bebida5.svg',
+        backgroundImage: '/img/bebida.svg',
         icon: '/img/icons/bebida5-icon.svg',
       },
     };

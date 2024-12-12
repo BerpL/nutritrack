@@ -32,19 +32,9 @@
                 class="meal-name-format"
                 [ngClass]="{ 'single-word': isSingleWord(getMealName(item.key, page)) }"
               >
-                <span *ngIf="isSingleWord(getMealName(item.key, page))">
+                <span>
                   {{ getMealName(item.key, page) }}
                 </span>
-                <ng-container
-                  *ngIf="!isSingleWord(getMealName(item.key, page))"
-                >
-                  <span class="first-word"
-                    >{{ getFirstWord(getMealName(item.key, page)) }}</span
-                  >
-                  <span class="second-word"
-                    >{{ getSecondWord(getMealName(item.key, page)) }}</span
-                  >
-                </ng-container>
               </div>
               <!-- Línea SVG entre comidas -->
               <div

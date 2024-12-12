@@ -18,6 +18,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     // Cargar el tema desde localStorage
+    const savedUsername = localStorage.getItem('username');
+    this.username = savedUsername ? savedUsername : 'admin';
     const savedTheme = localStorage.getItem('theme');
     this.theme = savedTheme ? savedTheme : 'winter';
     document.documentElement.setAttribute('data-theme', this.theme);

@@ -187,10 +187,13 @@ export class UploadComponent implements AfterViewInit {
 
   async downloadPDF() {
     this.isDownloading = true; // Mostrar spinner de descarga
+  
+    // Crear PDF con compresión activada
     const pdf = new jsPDF({
       orientation: 'p', // Mantiene la orientación vertical
       unit: 'px',       // Usa píxeles como unidad
-      format: [1080, 1920], // Establece el tamaño en píxeles: 1080px x 1920px
+      format: [1080, 1920], // Tamaño de la página en píxeles
+      compress: true,    // Activa compresión
     });
   
     for (let i = 0; i < this.excelPagesData.length; i++) {
@@ -220,21 +223,21 @@ export class UploadComponent implements AfterViewInit {
             // 3. Asegurarse de que el DOM esté completamente renderizado
             await new Promise<void>((resolveAnimation) =>
               requestAnimationFrame(() => resolveAnimation())
-            );            
+            );
   
             // 4. Capturar el contenido con html2canvasPro
             const canvas = await html2canvasPro(this.pdfContent.nativeElement, {
-              scale: 2, // Mejor calidad
+              scale: 1.5, // Ajustar escala para reducir el tamaño del PDF
               useCORS: true,
             });
   
             // 5. Agregar la imagen capturada al PDF
-            const imgData = canvas.toDataURL('image/png');
+            const imgData = canvas.toDataURL('image/jpeg', 0.75); // Cambiar a formato JPEG con calidad ajustada
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
   
             if (i > 0) pdf.addPage(); // Añadir una nueva página después de la primera
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
   
             resolve();
           } catch (error) {
@@ -251,8 +254,7 @@ export class UploadComponent implements AfterViewInit {
     // Actualizar estados después de la descarga
     this.isDownloading = false;
     this.showReloadButton = true; // Mostrar el botón de "Volver a cargar"
-  }
-   
+  }  
   
   // Nueva función para reiniciar el proceso
   resetProcess() {
